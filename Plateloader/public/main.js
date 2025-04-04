@@ -36,6 +36,26 @@ function main() {
         sendCommand("X-AXIS 5");
     };
 
+    document.querySelector("#zextend").onclick = () => {
+        sendCommand("Z-AXIS EXTEND");
+    };
+
+    document.querySelector("#zretract").onclick = () => {
+        sendCommand("Z-AXIS RETRACT");
+    };
+
+    document.querySelector("#gripperopen").onclick = () => {
+        sendCommand("GRIPPER OPEN");
+    };
+
+    document.querySelector("#gripperclose").onclick = () => {
+        sendCommand("GRIPPER CLOSE");
+    };
+
+    document.querySelector("#loaderstatus").onclick = () => {
+        sendCommand("LOADER_STATUS");
+    };
+
     document.querySelector("#move").onclick = () => {
         let fromIndex = document.querySelector("#fromIndex").value;
         let toIndex = document.querySelector("#toIndex").value;
