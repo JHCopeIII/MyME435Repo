@@ -16,7 +16,7 @@ def naked_domain_redirect():
 def command_api(command):
     with serial_lock:
         pl = PlateLoader()
-        pl.connect("/dev/ttyACM0")
+        pl.connect("COM3")
         response = pl.send_command(command)
         pl.disconnect()
         return response
