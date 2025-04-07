@@ -6,7 +6,7 @@ class ArduinoCommander:
         self.is_connected = False
         self.ser = None
         
-    def connect(self, port="COM3"):
+    def connect(self, port="ttyACM0"):
         print("Connecting... ", end="")
         self.ser = serial.Serial(port, baudrate=19200, timeout=2)
         while not self.ser.is_open:
@@ -47,7 +47,7 @@ class ArduinoCommander:
 if __name__ == "__main__":
     print("Arduino Command Console\n")
     arduino = ArduinoCommander()
-    arduino.connect("COM3")
+    arduino.connect("ttyACM0")
 
     while True:
         print("\nOptions:")

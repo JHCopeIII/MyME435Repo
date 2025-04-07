@@ -16,7 +16,7 @@ def naked_domain_redirect():
 def command_api(command):
     with serial_lock:
         pl = ArduinoCommander()
-        pl.connect("COM5")
+        pl.connect("ttyACM0")
         response = pl.send_command(command)
         pl.disconnect()
         return response
