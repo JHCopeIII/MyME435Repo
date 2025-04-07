@@ -26,6 +26,7 @@ class ArduinoCommander:
         if not self.is_connected:
             self.connect()
             
+        # Sending
         message_bytes = (command + "\n").encode()
         print("Sending:", message_bytes)
         self.ser.write(message_bytes)
@@ -40,32 +41,31 @@ class ArduinoCommander:
 
 if __name__ == "__main__":
     print("Arduino Command Console\n")
-    arduino = ArduinoCommander()
-    arduino.connect("ttyACM0")
+    exam1arduino = ArduinoCommander()
+    exam1arduino.connect("ttyACM0")
 
     while True:
-        print("\nOptions:")
-        print("0. Exit")
+        resp = ""
+        print("\n\n0. Exit")
         print("1. Turn LED ON")
         print("2. Turn LED OFF")
         print("3. FLASH LED")
-        selection = input("Make a selection: ").strip()
-
+        selection = input("Make a selection: ")
         if selection == "0":
             break
         elif selection == "1":
-            arduino.send_command("LED ON")
+            exam1arduino.send_command("LED ON")
         elif selection == "2":
-            arduino.send_command("LED OFF")
+            exam1arduino.send_command("LED OFF")
         elif selection == "3":
             try:
                 count = int(input("Number of flashes: "))
                 period = int(input("Delay per flash (ms): "))
-                arduino.send_command(f"FLASH {count} {period}")
+                exam1arduino.send_command(f"FLASH {count} {period}")
             except ValueError:
                 print("Please enter valid integers.")
         else:
             print("Invalid selection.")
 
-    arduino.disconnect()
+    exam1arduino.disconnect()
     print("Goodbye!")
