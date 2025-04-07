@@ -6,7 +6,7 @@ class ArduinoCommander:
         self.is_connected = False
         self.ser = None
         
-    def connect(self, port="ttyACM0"):
+    def connect(self, port="/dev/ttyACM0"):
         self.is_connected = True
         self.ser = serial.Serial(port, baudrate=19200)
         print("Connecting... ", end="")

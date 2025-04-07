@@ -20,8 +20,8 @@ function main() {
     };
 
     document.querySelector("#flash").onclick = () => {
-        let fromIndex = document.querySelector("#flashes").value;
-        let toIndex = document.querySelector("#periodms").value;
+        let flashes = document.querySelector("#flashes").value;
+        let periodms = document.querySelector("#periodms").value;
         sendCommand(`FLASH ${flashes} ${periodms}`);
     };
     
