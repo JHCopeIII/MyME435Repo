@@ -13,7 +13,7 @@ class ArduinoCommander:
         while not self.ser.is_open:
             time.sleep(0.1)
         print("Connected!")
-        time.sleep(3)
+        time.sleep(1)
         self.ser.reset_input_buffer()
     
     def disconnect(self):

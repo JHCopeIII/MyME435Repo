@@ -23,14 +23,14 @@ def command_api(command):
 
 @app.route("/api/led/on")
 def led_on():
-    return send_serial_command("LED ON")
+    return command_api("LED ON")
 
 @app.route("/api/led/off")
 def led_off():
-    return send_serial_command("LED OFF")
+    return command_api("LED OFF")
 
 @app.route("/api/flash/<int:count>/<int:delay>")
 def flash(count, delay):
-    return send_serial_command(f"FLASH {count} {delay}")
+    return command_api(f"FLASH {count} {delay}")
 
 app.run(host="0.0.0.0", port=8080, debug=True)
