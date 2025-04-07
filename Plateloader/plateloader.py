@@ -39,7 +39,6 @@ class PlateLoader:
             print("Received:", response.decode().strip())
         return response
         
-
 if __name__ == "__main__":
     print("Testing PlateLoader")
     plateloader = PlateLoader()

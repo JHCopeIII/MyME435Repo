@@ -40,7 +40,7 @@ class ArduinoCommander:
         return response
 
 if __name__ == "__main__":
-    print("Arduino Command Console\n")
+    print("Arduino Command Console")
     exam1arduino = ArduinoCommander()
     exam1arduino.connect("ttyACM0")
     while True:
@@ -66,5 +66,4 @@ if __name__ == "__main__":
         else:
             print("Invalid selection.")
 
-    exam1arduino.disconnect()
     print("Goodbye!")
