@@ -13,7 +13,7 @@ class ArduinoCommander:
         while not self.ser.is_open:
             time.sleep(0.1)
         print("Connected!")
-        time.sleep(1)
+        time.sleep(3)
         self.ser.reset_input_buffer()
     
     def disconnect(self):
@@ -42,7 +42,7 @@ class ArduinoCommander:
 if __name__ == "__main__":
     print("Arduino Command Console")
     exam1arduino = ArduinoCommander()
-    exam1arduino.connect("ttyACM0")
+    exam1arduino.connect("/dev/ttyACM0")
     while True:
         resp = ""
         print("\n\n0. Exit")
