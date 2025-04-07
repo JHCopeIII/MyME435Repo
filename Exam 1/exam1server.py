@@ -1,6 +1,6 @@
 import flask
 import threading
-from plateloader import PlateLoader
+from exam1arduino import ArduinoCommander
 
 app = flask.Flask(__name__, 
                   static_url_path="", 
@@ -15,7 +15,7 @@ def naked_domain_redirect():
 @app.route("/api/<command>")
 def command_api(command):
     with serial_lock:
-        pl = PlateLoader()
+        pl = ArduinoCommander()
         pl.connect("COM5")
         response = pl.send_command(command)
         pl.disconnect()
