@@ -7,11 +7,11 @@ class ArduinoCommander:
         self.ser = None
         
     def connect(self, port="ttyACM0"):
+        self.is_connected = True
+        self.ser = serial.Serial(port, baudrate=19200)
         print("Connecting... ", end="")
-        self.ser = serial.Serial(port, baudrate=19200, timeout=2)
         while not self.ser.is_open:
             time.sleep(0.1)
-        self.is_connected = True
         print("Connected!")
         time.sleep(1)
         self.ser.reset_input_buffer()
@@ -26,23 +26,17 @@ class ArduinoCommander:
         if not self.is_connected:
             self.connect()
             
-        message_bytes = (command.strip() + "\n").encode()
+        message_bytes = (command + "\n").encode()
         print("Sending:", message_bytes)
         self.ser.write(message_bytes)
         
-        # Await response
-        lines = []
-        start_time = time.time()
-        while time.time() - start_time < 5:  # Timeout of 5 seconds
-            while self.ser.in_waiting > 0:
-                response = self.ser.readline().decode().strip()
-                if response:
-                    print("Received:", response)
-                    lines.append(response)
-            if lines:
-                break
+        # Receiving
+        while self.ser.in_waiting == 0:
             time.sleep(0.1)
-        return lines
+        while self.ser.in_waiting > 0:
+            response = self.ser.readline()
+            print("Received:", response.decode().strip())
+        return response
 
 if __name__ == "__main__":
     print("Arduino Command Console\n")
@@ -55,7 +49,6 @@ if __name__ == "__main__":
         print("1. Turn LED ON")
         print("2. Turn LED OFF")
         print("3. FLASH LED")
-        print("4. MOVE Command (Simulated)")
         selection = input("Make a selection: ").strip()
 
         if selection == "0":
@@ -71,9 +64,6 @@ if __name__ == "__main__":
                 arduino.send_command(f"FLASH {count} {period}")
             except ValueError:
                 print("Please enter valid integers.")
-        elif selection == "4":
-            location = input("Enter simulated move position: ").strip()
-            arduino.send_command(f"MOVE {location}")
         else:
             print("Invalid selection.")
 
