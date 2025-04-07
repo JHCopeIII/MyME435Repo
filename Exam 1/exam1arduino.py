@@ -43,7 +43,6 @@ if __name__ == "__main__":
     print("Arduino Command Console\n")
     exam1arduino = ArduinoCommander()
     exam1arduino.connect("ttyACM0")
-
     while True:
         resp = ""
         print("\n\n0. Exit")
@@ -54,14 +53,14 @@ if __name__ == "__main__":
         if selection == "0":
             break
         elif selection == "1":
-            exam1arduino.send_command("LED ON")
+            resp = exam1arduino.send_command("LED ON")
         elif selection == "2":
-            exam1arduino.send_command("LED OFF")
+            resp = exam1arduino.send_command("LED OFF")
         elif selection == "3":
             try:
                 count = int(input("Number of flashes: "))
                 period = int(input("Delay per flash (ms): "))
-                exam1arduino.send_command(f"FLASH {count} {period}")
+                resp = exam1arduino.send_command(f"FLASH {count} {period}")
             except ValueError:
                 print("Please enter valid integers.")
         else:
