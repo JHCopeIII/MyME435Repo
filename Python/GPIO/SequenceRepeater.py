@@ -8,16 +8,12 @@ def function_using_def():
     print("Function using def")
     print("As many lines of code as you want")
 
-def some_helper_function(led_board, brightness):
-    print("Some helper function")
-    led_board.value = (brightness, 0, brightness)
-    time.sleep(1)
-    led_board.value = (0, 0, 0)
-    time.sleep(1)
-
 def led_board():
     print("LED Board")
     led_board = gz.LEDBoard(14, 15, 18, pwm=True)
+    button_red = gz.Button(22)
+    button_yellow = gz.Button(23)
+    button_green = gz.Button(24)
     for k in range(5):
         led_board.on()
         time.sleep(1)
