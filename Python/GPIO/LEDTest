@@ -1,0 +1,12 @@
+from gpiozero import LED, Button
+import time
+
+led = LED(14)  # Replace with the pin you want to test
+button = Button(22)  # Replace with the pin you want to test
+
+while True:
+    if button.is_pressed:
+        led.on()
+    else:
+        led.off()
+    time.sleep(0.1)

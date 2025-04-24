@@ -2,87 +2,59 @@ import gpiozero as gz
 import time
 import signal
 
-function_using_lambda = lambda: print("Function using lambda")
+# Setup LEDs and Buttons
+leds = {
+    "red": gz.LED(14),
+    "yellow": gz.LED(15),
+    "green": gz.LED(18)
+}
 
-def function_using_def():
-    print("Function using def")
-    print("As many lines of code as you want")
+buttons = {
+    "red": gz.Button(22),
+    "yellow": gz.Button(23),
+    "green": gz.Button(24)
+}
 
-def led_board():
-    print("Simon Says Game Starting...")
-    
-    # Initialize LEDs and buttons
-    leds = gz.LEDBoard(14, 15, 18, pwm=False)
-    button_red = gz.Button(22)
-    button_yellow = gz.Button(23)
-    button_green = gz.Button(24)
+colors = ["red", "yellow", "green"]
+sequence = []
+user_input_enabled = True
 
-    # Map buttons to LEDs
-    button_to_led = {
-        button_red: leds[0],
-        button_yellow: leds[1],
-        button_green: leds[2]
-    }
+def flash_led(color, duration=0.5):
+    leds[color].on()
+    time.sleep(duration)
+    leds[color].off()
+    time.sleep(0.2)
 
-    sequence = []  # Store the sequence of button presses
+def play_sequence():
+    global user_input_enabled
+    user_input_enabled = False  # Disable button presses during playback
+    for color in sequence:
+        flash_led(color)
+    user_input_enabled = True  # Re-enable button presses after playback
 
-    def button_pressed(button):
-        # Add the pressed button's LED to the sequence
-        led = button_to_led[button]
-        sequence.append(led)
-        led.on()  # Light up the LED
-        time.sleep(0.5)
-        led.off()  # Turn off the LED
+def on_button_press(color):
+    def handler():
+        global user_input_enabled
+        if user_input_enabled:
+            leds[color].on()
+            time.sleep(0.3)
+            leds[color].off()
+            sequence.append(color)
+            time.sleep(0.3)
+            play_sequence()
+    return handler
 
-    # Assign button press handlers
-    button_red.when_pressed = lambda: button_pressed(button_red)
-    button_yellow.when_pressed = lambda: button_pressed(button_yellow)
-    button_green.when_pressed = lambda: button_pressed(button_green)
+def simon_says_event_version():
+    print("Simon Says Start")
 
-    print("Press buttons to create a sequence. Press Ctrl+C to stop and let the computer play.")
+    # Assign event-driven handlers
+    for color in colors:
+        buttons[color].when_pressed = on_button_press(color)
 
     try:
-        # Wait for the user to input the sequence
-        signal.pause()
+        signal.pause()  # Wait forever until Ctrl+C
     except KeyboardInterrupt:
-        print("\nPlaying back the sequence...")
+        print("\nGame Over")
 
-        # Replay the sequence using LEDs
-        for led in sequence:
-            led.on()
-            time.sleep(0.5)
-            led.off()
-            time.sleep(0.2)
-
-    print("Game Over!")
-
-def button_events():
-     print("Button Events")
-     button = gz.Button(25)
-     # button.when_pressed = lambda: print("Button pressed")
-     # button.when_released = lambda: print("Button released")
-     # button.when_held = lambda: some_helper_function(led_board, 0.5)
-
-     button.when_pressed = function_using_def
-     button.when_released = function_using_lambda
-     button.when_held = lambda: some_helper_function(led_board, 0.5)
-     signal.pause()
-
-def button_states():
-    print("Button States")
-    button = gz.Button(25)
-    
-    while True:
-        if button.is_pressed:
-            print("Button is pressed")
-        else:
-            print("Button is not pressed")
-        time.sleep(0.5)
-
-def main():
-        print("Pushbuttons")
-        # button_states()
-        button_events()
-
-
-main()
+if __name__ == "__main__":
+    simon_says_event_version()
