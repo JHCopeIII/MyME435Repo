@@ -2,6 +2,7 @@ import gpiozero as gz
 import time
 import signal
 
+# Setup LEDs and Buttons
 leds = {
     "red": gz.LED(14),
     "yellow": gz.LED(15),
@@ -26,10 +27,10 @@ def flash_led(color, duration=0.5):
 
 def play_sequence():
     global user_input_enabled
-    user_input_enabled = False
+    user_input_enabled = False  # Disable button presses during playback
     for color in sequence:
         flash_led(color)
-    user_input_enabled = True
+    user_input_enabled = True  # Re-enable button presses after playback
 
 def on_button_press(color):
     def handler():
@@ -46,11 +47,12 @@ def on_button_press(color):
 def simon_says_event_version():
     print("Simon Says Start")
 
+    # Assign event-driven handlers
     for color in colors:
         buttons[color].when_pressed = on_button_press(color)
 
     try:
-        signal.pause() 
+        signal.pause()  # Wait forever until Ctrl+C
     except KeyboardInterrupt:
         print("\nGame Over")
 
