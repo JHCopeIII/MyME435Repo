@@ -1,4 +1,5 @@
 from rosebot import RoseBot
+import time
 
 def main():
     print("Line Follower Program")
@@ -13,7 +14,7 @@ def main():
             #   follow the line
             #   Get the line sensor readings
             #   Update the robot's speed based on the line sensor readings
-        time.sleep(0.1)  # Sleep for a short duration to avoid busy waiting
+            time.sleep(0.1)  # Sleep for a short duration to avoid busy waiting
     except KeyboardInterrupt:
         robot.drive_system.stop()  # Stop the robot on exit
         robot.drive_system.close()  # Close the drive system

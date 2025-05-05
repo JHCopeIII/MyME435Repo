@@ -1,4 +1,4 @@
-from gpiozero as gz
+from gpiozero import gz
 import time
 
 class Ultrasonic:
