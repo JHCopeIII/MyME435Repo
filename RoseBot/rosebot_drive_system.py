@@ -9,12 +9,19 @@ class DriveSystem:
 
     def scale_speed(self, speed):
         return int(speed / 100 * 4095)
+
+    def set_speeds(self, lf, lr, rf, rr):
+        lf_duty = self.scale_speed(lf)
+        lr_duty = self.scale_speed(lr)
+        rf_duty = self.scale_speed(rf)
+        rr_duty = self.scale_speed(rr)
     
     def go(self, left_speed, right_speed):
         left_duty = self.scale_speed(left_speed)
         right_duty = self.scale_speed(right_speed)
         self.car.set_motor_model(left_duty, left_duty, right_duty, right_duty)
 
+<<<<<<< HEAD
     def go(self, left_speed, right_speed):
         left_duty = self.scale_speed(left_speed)
         right_duty = self.scale_speed(right_speed)
@@ -22,6 +29,11 @@ class DriveSystem:
 
     def stop(self):
         self.set_speeds(0,0,0,0)
+=======
+    def stop(self)
+        self.set_speeds(0,0,0,0)
+
+>>>>>>> 76c7755 (Update)
 
     def go_straight_for_seconds(self, seconds, speed):
         self.go(speed, speed)
