@@ -70,7 +70,7 @@ class App:
 
 def main():
     print("GPIO MQTT Test")
-    app = APP()
+    app = App()
 
     try:
         while True:
