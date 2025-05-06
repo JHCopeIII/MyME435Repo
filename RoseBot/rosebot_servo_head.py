@@ -23,8 +23,8 @@ if __name__ == "__main__":
             # Example usage
             servo_head.reset()
             time.sleep(1)
-            servo_head.set_pan_angle(30)
-            servo_head.set_tilt_angle(30)
+            servo_head.set_pan_angle(0)
+            servo_head.set_tilt_angle(0)
             time.sleep(2)
             servo_head.set_pan_angle(150)
             servo_head.set_tilt_angle(150)

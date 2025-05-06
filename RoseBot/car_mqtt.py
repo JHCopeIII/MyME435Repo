@@ -20,7 +20,12 @@ class App:
                 self.robot.drive_system.set_speeds(payload[0], payload[1], payload[2], payload[3])
             if type_name == "stop":
                 self.robot.drive_system.stop()
-        
+            if type_name == "pan":
+                self.robot.servo_head.set_pan_angle(payload)
+            if type_name == "tilt":
+                self.robot.servo_head.set_tilt_angle(payload)
+            if type_name == "beep":
+                self.robot.buzzer.beep(on_time=0.3, off_time=0.2, repeat=2)
 
 def main():
     print("Car MQTT Lab 5")
