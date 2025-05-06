@@ -24,7 +24,6 @@ class DriveSystem:
     def stop(self):
         self.set_speeds(0,0,0,0)
 
-
     def go_straight_for_seconds(self, seconds, speed):
         self.go(speed, speed)
         time.sleep(seconds)
