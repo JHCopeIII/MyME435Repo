@@ -1,0 +1,13 @@
+import gpiozero as gz
+import time
+
+# Test the ultrasonic sensor
+ultrasonic = gz.DistanceSensor(echo=22, trigger=27)
+
+try:
+    while True:
+        distance = ultrasonic.distance * 100  # Convert to cm
+        print(f"Distance: {distance:.2f} cm")
+        time.sleep(0.5)
+except KeyboardInterrupt:
+    print("Exiting...")

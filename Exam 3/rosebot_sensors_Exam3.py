@@ -1,21 +1,26 @@
 import gpiozero as gz
 import time
+import warnings
 
 class Ultrasonic:
-    def __init__(self):
-        self.distance_sensor = gz.DistanceSensor(echo=22, trigger=17)
 
-    def get_distance(self):
+    def __init__(self):
+        warnings.filterwarnings("ignore", category = gz.PWMSoftwareFallback)  # Ignore PWM software fallback warnings
+
+        self.distance_sensor = gz.DistanceSensor(echo=22, trigger=27)
+
+    def get_cm(self):
         return self.distance_sensor.distance * 100
 
-class Linesensor:
+
+class LineSensors:
     
-    def _init__(self):
-        self.was_line_left = True
+    def __init__(self):
+        self.was_line_left = True   # Default value
         self.left = gz.LineSensor(14)
         self.middle = gz.LineSensor(15)
         self.right = gz.LineSensor(23)
-
+    
     def get_left(self):
         if self.left.value == 1:
             return "B"
@@ -34,8 +39,8 @@ class Linesensor:
     def get_lineword(self):
         return self.get_left() + self.get_middle() + self.get_right()
     
-    def get_values(self):
-        lineword = self.get_lineword
+    def get_value(self):
+        lineword = self.get_lineword()
         if lineword == "WWW":
             if self.was_line_left:
                 return -3
@@ -55,13 +60,18 @@ class Linesensor:
             self.was_line_left = False
             return 2
         else:
-            return 0
-    
+            return 0  # Weird cases BWB or BBB
+
 
 if __name__ == "__main__":
+    print("Local testing for the two sensor types")
+    
     ultrasonic = Ultrasonic()
-    while True:
-        distance = ultrasonic.get_distance()
-        print(f"Distance = {ultrasonic.get_distance()} cm")
-        print(f"Line word = {Linesensor.get_lineword()} value = {Linesensor.get_values()}")
-        time.sleep(0.1)  # Sleep for a short duration to avoid busy waiting
+    line_sensors = LineSensors()
+    try:
+        while True:
+            print(f"Distance in cm = {ultrasonic.get_cm()}")
+            print(f"Line word = {line_sensors.get_lineword()}  value = {line_sensors.get_value()}")
+            time.sleep(2.0)
+    except KeyboardInterrupt:
+        print("End of program")
