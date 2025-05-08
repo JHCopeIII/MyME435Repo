@@ -34,7 +34,7 @@ class MqttClient(object):
               mqtt_broker_ip_address="mosquitto.csse.rose-hulman.edu",
               use_off_campus_broker=False):
     if mqtt_broker_ip_address == "mosquitto.csse.rose-hulman.edu" and use_off_campus_broker:
-      default_off_campus_broker = "test.mosquitto.org" # or broker.hivemq.com
+      default_off_campus_broker = "broker.hivemq.com" # or broker.hivemq.com
       print(f"Using {default_off_campus_broker} instead of mosquitto.csse.rose-hulman.edu")
       mqtt_broker_ip_address = default_off_campus_broker 
     self.subscription_topic_name = subscription_topic_name
