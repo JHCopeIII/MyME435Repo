@@ -50,15 +50,15 @@ class DriveSystem:
             self.car.set_motor_model(-duty, -duty, duty, duty)
         else:
             self.car.set_motor_model(duty, duty, -duty, -duty)
-    time.sleep(seconds)
-    self.stop()
+        time.sleep(seconds)
+        self.stop()
 
     def spin_in_place_for_degrees(self, degrees, isLeft = True):
         m = 0.5
         B = 0.5
         degrees_per_second = m * degrees + B
         seconds = degrees / degrees_per_second
-        self.spin_in_place_for_seconds(seconds, speed, isLeft)
+        self.spin_in_place_for_seconds(seconds, degrees, isLeft)
 
     def stop(self):
         self.car.set_motor_model(0, 0, 0, 0)
