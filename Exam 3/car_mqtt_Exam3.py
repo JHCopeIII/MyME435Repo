@@ -59,7 +59,7 @@ class App:
          
     def send_ultrasonic_reading(self):
         try:
-            distance = self.robot.ultrasonic.distance_sensor()  # Get distance in cm
+            distance = self.robot.ultrasonic.distance_sensor.distance * 100  # Correct: Accessing the distance attribute
             if distance is not None:
                 print(f"Ultrasonic distance: {distance} cm")
                 self.mqtt_client.send_message("ultra", distance)
@@ -77,6 +77,8 @@ def main():
         # Keep the program running to receive MQTT messages
         while True:
             time.sleep(0.1)  # Prevent high CPU usage
+            app.send_ultrasonic_reading()
+            time.sleep(2.0)
             app.mqtt_client.send_message("left_forward", [1, 40])
             time.sleep(2.0)
             app.mqtt_client.send_message("left_backward", [1, 40])
