@@ -48,31 +48,13 @@ class App:
             
 
 def main():
-    print("Car MQTT Lab 5")
+    print("Exam 3 - Waiting for commands from MATLAB App Designer")
     app = App()
 
     try:
+        # Keep the program running to receive MQTT messages
         while True:
-            time.sleep(0.1)
-
-            #Testing the wheel set_speeds method
-            app.mqtt_client.send_message("set_speeds", [50, 50, 50, 50])
-            time.sleep(1.0)
-            app.mqtt_client.send_message("set_speeds", [-50, -50, -50, -50])
-            time.sleep(1.0)
-            app.mqtt_client.send_message("stop")
-            time.sleep(2.0)
-            #app.mqtt_client.send_message("red", "on")
-            #app.mqtt_client.send_message("yellow", 1)
-            #app.mqtt_client.send_message("green", True)
-            app.mqtt_client.send_message("leds", [1, 0, 1])
-            time.sleep(2.0)
-            #app.mqtt_client.send_message("red", "off")
-            #app.mqtt_client.send_message("yellow", 0)
-            #app.mqtt_client.send_message("green", False)
-            app.mqtt_client.send_message("leds", [0, 1, 0])
-            time.sleep(2.0)
-
+            time.sleep(0.1)  # Prevent high CPU usage
 
     except KeyboardInterrupt:
         print("Exiting...")
