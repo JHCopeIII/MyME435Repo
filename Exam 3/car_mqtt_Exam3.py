@@ -9,7 +9,7 @@ class App:
         self.mqtt_client.callback = self.mqtt_callback
         self.mqtt_client.connect(subscription_topic_name="me435/copejh/#",
                                 publish_topic_name="me435/copejh/to_computer",
-                                use_off_campus_broker=False)
+                                use_off_campus_broker=True)
         
 
     def mqtt_callback(self, type_name, payload):
@@ -79,18 +79,18 @@ def main():
             time.sleep(0.1)  # Prevent high CPU usage
             app.send_ultrasonic_reading()
             time.sleep(2.0)
-            app.mqtt_client.send_message("left_forward", [1, 40])
-            time.sleep(2.0)
-            app.mqtt_client.send_message("left_backward", [1, 40])
-            time.sleep(2.0)
-            app.mqtt_client.send_message("right_forward", [1, 40])
-            time.sleep(2.0)
-            app.mqtt_client.send_message("right_backward", [1, 40])
-            time.sleep(2.0)
-            app.mqtt_client.send_message("both_forward", [1, 40, 40])
-            time.sleep(2.0)
-            app.mqtt_client.send_message("both_backward", [1, 40, 40])
-            time.sleep(2.0)
+            # app.mqtt_client.send_message("left_forward", [1, 40])
+            # time.sleep(2.0)
+            # app.mqtt_client.send_message("left_backward", [1, 40])
+            # time.sleep(2.0)
+            # app.mqtt_client.send_message("right_forward", [1, 40])
+            # time.sleep(2.0)
+            # app.mqtt_client.send_message("right_backward", [1, 40])
+            # time.sleep(2.0)
+            # app.mqtt_client.send_message("both_forward", [1, 40, 40])
+            # time.sleep(2.0)
+            # app.mqtt_client.send_message("both_backward", [1, 40, 40])
+            # time.sleep(2.0)
 
     except KeyboardInterrupt:
         print("Exiting...")
