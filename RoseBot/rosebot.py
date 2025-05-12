@@ -10,4 +10,4 @@ class RoseBot:
         self.ultrasonic = Ultrasonic()
         self.line_sensor = Linesensor()
         self.servo_head = ServoHead()
-        self.buzzer = gz.Buzzer(17)
+        # self.buzzer = gz.Buzzer(17)
