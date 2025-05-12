@@ -4,7 +4,7 @@ import time
 
 class App:
     def __init__(self):
-        self.robot = Rosebot()
+        self.robot = RoseBot()
 
         self.mqtt_client = MqttClient()
         self.mqtt_client.callback = self.mqtt_callback
