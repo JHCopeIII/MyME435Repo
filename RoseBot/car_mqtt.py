@@ -37,7 +37,9 @@ class App:
                 elif self.mode == "drive_until_wall" or self.mode == "drive_until_line":
                     self.robot.drive_system.go(20, 20)
                     
-
+        if type_name == "get_voltage":
+            voltage = self.robot.adc.get_battery_voltage()
+            self.mqtt_client.send_message("voltage", voltage)
 
 def main():
     print("Car MQTT Lab 5")
