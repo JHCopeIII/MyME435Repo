@@ -59,7 +59,7 @@ def main():
                     app.mqtt_client.send_message("line_sensor_readings", 
                                                  {"timestamp": date_time,
                                                   "left": app.robot.line_sensor.get_left(),
-                                                  "center": app.robot.line_sensor.get_center(),
+                                                  "middle": app.robot.line_sensor.get_middle(),
                                                   "right": app.robot.line_sensor.get_right()})
 
             if app.mode == "drive_until_wall":
