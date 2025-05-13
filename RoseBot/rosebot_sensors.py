@@ -28,7 +28,7 @@ class Ultrasonic:
         return self.distance_sensor.distance * 100
 
 
-class LineSensor:
+class LineSensors:
     
     def __init__(self):
         self.was_line_left = True   # Default value
@@ -82,7 +82,7 @@ if __name__ == "__main__":
     print("Local testing for the two sensor types")
     
     ultrasonic = Ultrasonic()
-    line_sensors = LineSensor()
+    line_sensors = LineSensors()
     rosebot_adc = RosebotAdc()
     try:
         while True:
