@@ -7,7 +7,6 @@ class RosebotAdc:
 
     def __init__(self):
         self.adc = ADC()  # Initialize the ADC class
-        
     def get_left_photoresistor(self):
         return self.adc.read_adc(0)
     def get_right_photoresistor(self):
