@@ -2,6 +2,7 @@ from rosebot_drive_system import DriveSystem
 from rosebot_sensors import Ultrasonic, LineSensors, RosebotAdc
 from rosebot_servo_head import ServoHead
 import gpiozero as gz
+from camera2 import Camera
 
 class RoseBot:
 
@@ -13,3 +14,4 @@ class RoseBot:
         self.servo_head = ServoHead()
         self.buzzer = gz.Buzzer(17)
         self.adc = RosebotAdc()
+        self.camera = Camera()
